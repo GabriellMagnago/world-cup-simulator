@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Copa do Mundo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏆 Simulador de Copa do Mundo</h1>
+            <p class="subtitle">Fase de Grupos e Mata-Mata</p>
+        </header>
+
+        <main>
+            <!-- Seção de Carregamento -->
+            <section id="loading" class="section loading-section">
+                <p>⏳ Carregando times da API...</p>
+            </section>
+
+            <!-- Seção de Grupos -->
+            <section id="groupsSection" class="section" style="display: none;">
+                <h2>📋 Fase de Grupos</h2>
+                <div id="groups" class="groups-container"></div>
+            </section>
+
+            <!-- Seção de Mata-Mata -->
+            <section id="playoffsSection" class="section" style="display: none;">
+                <h2>⚔️ Mata-Mata</h2>
+                <div id="playoffs" class="playoffs-container"></div>
+            </section>
+
+            <!-- Seção de Final -->
+            <section id="finalSection" class="section" style="display: none;">
+                <h2>🥇 Campeão do Mundo</h2>
+                <div id="final" class="final-container"></div>
+            </section>
+
+            <!-- Botões de Ação -->
+            <section id="actions" class="section" style="display: none;">
+                <button id="startBtn" class="btn btn-primary">🚀 Iniciar Simulação</button>
+            </section>
+        </main>
+
+        <footer>
+            <p>Aplicação desenvolvida para teste de estágio</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
