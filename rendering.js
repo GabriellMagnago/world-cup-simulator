@@ -100,17 +100,22 @@ function createPlayoffMatchElement(match) {
     const div = document.createElement('div');
     div.className = 'playoff-match';
 
+    // Garante que team1 e team2 sejam strings (podem ser objetos)
+    const team1Name = typeof match.team1 === 'string' ? match.team1 : match.team1?.name || 'Equipe 1';
+    const team2Name = typeof match.team2 === 'string' ? match.team2 : match.team2?.name || 'Equipe 2';
+    const winner = typeof match.winner === 'string' ? match.winner : match.winner?.name || match.winner;
+
     const team1Div = document.createElement('div');
-    team1Div.className = `playoff-team ${match.winner === match.team1 ? 'winner' : ''}`;
+    team1Div.className = `playoff-team ${winner === team1Name ? 'winner' : ''}`;
     team1Div.innerHTML = `
-        <span class="playoff-team-name">${match.team1}</span>
+        <span class="playoff-team-name">${team1Name}</span>
         <span class="playoff-team-score">${match.score1}</span>
     `;
 
     const team2Div = document.createElement('div');
-    team2Div.className = `playoff-team ${match.winner === match.team2 ? 'winner' : ''}`;
+    team2Div.className = `playoff-team ${winner === team2Name ? 'winner' : ''}`;
     team2Div.innerHTML = `
-        <span class="playoff-team-name">${match.team2}</span>
+        <span class="playoff-team-name">${team2Name}</span>
         <span class="playoff-team-score">${match.score2}</span>
     `;
 
@@ -134,12 +139,18 @@ function renderChampion() {
     const champion = state.champion;
     const finalMatch = state.playoffs.final;
 
+    // Garante que champion seja string
+    const championName = typeof champion === 'string' ? champion : champion?.name || 'Campeão';
+    const team1Name = typeof finalMatch.team1 === 'string' ? finalMatch.team1 : finalMatch.team1?.name || 'Equipe 1';
+    const team2Name = typeof finalMatch.team2 === 'string' ? finalMatch.team2 : finalMatch.team2?.name || 'Equipe 2';
+    const opponent = team1Name === championName ? team2Name : team1Name;
+
     finalContainer.innerHTML = `
         <div class="champion-emoji">🏆</div>
         <div class="champion-title">Campeão Mundial de 2026!</div>
-        <div class="champion-name">${champion.toUpperCase()}</div>
-        <div style="margin-top: 30px; font-size: 1.1em;">
-            <p>Venceu a Final contra ${finalMatch.team1 === champion ? finalMatch.team2 : finalMatch.team1}</p>
+        <div class="champion-name">${championName.toUpperCase()}</div>
+        <div class="champion-final-info" style="margin-top: 30px; font-size: 1.1em;">
+            <p>Venceu a Final contra ${opponent}</p>
             <p style="margin-top: 15px;">Resultado: <strong>${finalMatch.score1} x ${finalMatch.score2}</strong></p>
             ${finalMatch.penalties1 !== null ? `<p>Pênaltis: <strong>${finalMatch.penalties1} x ${finalMatch.penalties2}</strong></p>` : ''}
         </div>
